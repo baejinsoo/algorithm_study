@@ -1,3 +1,4 @@
+# 백준 2178
 from collections import deque
 
 n, m = map(int, input().split())
@@ -27,5 +28,7 @@ def bfs(x,y):
                 maze[nx][ny] = maze[x][y] + 1
                 q.append((nx,ny))
     return maze[-1][-1]
+
+
 # 시작지점
 print(bfs(0,0))
