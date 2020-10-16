@@ -23,6 +23,6 @@ for i in range(1, N + 1):
     if distance[i] == K:
         print(i)
         check = True
-        
+
 if check == False:
     print(-1)
