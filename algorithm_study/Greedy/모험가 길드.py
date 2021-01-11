@@ -1,22 +1,52 @@
-from collections import deque
+# from collections import deque
 
-N = int(input())
-adv = list(map(int, input().split()))
-num = 0
+# N = int(input())
+# adv = list(map(int, input().split()))
+# num = 0
 
-adv.sort(reverse=True)
-q = deque(adv)
-result = [[] for _ in range(N)]
-j = 0
-while q:
-    index = q.popleft()
-    result[j].append(index)
-    for i in range(index-1):
-        result[j].append(q.popleft())
-    j += 1
+# adv.sort(reverse=True)
+# q = deque(adv)
+# result = [[] for _ in range(N)]
+# j = 0
+# while q:
+#     index = q.popleft()
+#     result[j].append(index)
+#     for i in range(index-1):
+#         result[j].append(q.popleft())
+#     j += 1
 
-for r in result:
-    if r:
-        num += 1
+# for r in result:
+#     if r:
+#         num += 1
 
-print(num)
+# print(result, num)
+# 큰 수 부터 할 경우 최대값 구하는데 오류 발생
+
+from collections import Counter
+
+n = int(input())
+fear_data = list(map(int, input().split()))
+
+result = 0
+count_data = Counter(fear_data).most_common()
+count_data.sort()
+print(count_data)
+
+new_list = []
+for data in count_data:
+    new_list.append(list(data))
+
+for i in range(len(new_list)-1):
+    if new_list[i][1] >= new_list[i][0]:
+        result += new_list[i][1] // new_list[i][0]
+        new_list[i+1][1] += (new_list[i][1] % new_list[i][0])
+    else:
+        new_list[i+1][1] += new_list[i][1] % new_list[i][0]
+if new_list[-1][1] >= new_list[-1][0]:
+    result += new_list[-1][1] // new_list[-1][0]
+
+print(result)
+
+# 리스트에 있는 숫자를 중복된 값이 몇개 있는지 확인 
+# 예제 -> [(1, 1), (2, 3), (3, 1)]
+# 공포도가 1인 사람이 더 많다면 결과값에 몫을 더하고 나머지는 다음 공포도 사람수에 넘겨줌
